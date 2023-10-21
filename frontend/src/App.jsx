@@ -2,17 +2,7 @@ import React from 'react';
 
 import PhotoList from './components/PhotoList';
 import './App.scss';
-
-const sampleDataForPhotoListItem = {
-  id: "1",
-  location: {
-    city: "Montreal",
-    country: "Canada",
-  },
-  imageSource: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
-  username: "Joe Example",
-  profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-};
+import TopNavigation from 'components/TopNavigationBar';
 
 const sampleDataForPhotoList = [
   {
@@ -68,23 +58,32 @@ const sampleDataForPhotoList = [
   },
 ];
 
+const sampleDataForTopicList = [
+  {
+    id: "1",
+    slug: "topic-1",
+    title: "Nature",
+  },
+  {
+    id: "2",
+    slug: "topic-2",
+    title: "Travel",
+  },
+  {
+    id: "3",
+    slug: "topic-3",
+    title: "People",
+  },
+];
+
 // Note: Rendering a single component to build components in isolation
 const App = () => {
   return (
     <div className="App">
+      <TopNavigation items={sampleDataForTopicList}/>
       <PhotoList items={sampleDataForPhotoList}/>
     </div>
   );
 };
-
-/** 
- * <PhotoListItem
-        username={sampleDataForPhotoListItem.username}
-        imageSource={sampleDataForPhotoListItem.imageSource}
-        profile={sampleDataForPhotoListItem.profile}
-        location={sampleDataForPhotoListItem.location}
-        key={sampleDataForPhotoListItem.id}
-      />
-*/
 
 export default App;
