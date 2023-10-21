@@ -1,14 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-function PhotoFavButton() {
+function PhotoFavButton(props) {
   const [liked, setLiked] = useState(false);
 
   const handleClick = () => {
     setLiked(!liked);
   } 
+
+  useEffect(() => {props.changeFavs(liked)}, [liked]);
 
   return (
     <div className="photo-list__fav-icon">

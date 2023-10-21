@@ -9,10 +9,8 @@ const PhotoList = (props) => {
       {props.photoItems.map((item) => {
         return (
           <PhotoListItem
-            username={item.user.name}
-            imageSource={item.urls.regular}
-            profile={item.user.profile}
-            location={item.location}
+            item={item}
+            editFavourite={props.editFavourite}
             key={item.id}
           />
         );
