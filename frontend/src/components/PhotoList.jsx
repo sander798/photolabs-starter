@@ -6,7 +6,7 @@ import PhotoListItem from "./PhotoListItem";
 const PhotoList = (props) => {
   return (
     <ul className="photo-list">
-      {props.items.map((item) => {
+      {props.photoItems.map((item) => {
         return (
           <PhotoListItem
             username={item.user.name}
