@@ -5,37 +5,32 @@ import HomeRoute from 'routes/HomeRoute';
 import topics from "mocks/topics";
 import photos from "mocks/photos";
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
+import useApplicationData from "hooks/useApplicationData"
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
-  const [favouritePhotos, setFavouritePhotos] = useState([]);
-  const [clickedPic, setClickedPic] = useState(null);
-
-  const editFavourite = (photoItem, adding) => {
-    if (adding) {
-      setFavouritePhotos([...favouritePhotos, photoItem]);
-    } else {
-      setFavouritePhotos(favouritePhotos.filter((item) => item.id !== photoItem.id));
-    }
-  };
-
-  const selectPic = (photoItem) => {
-    setClickedPic(photoItem);
-  };
+  const {
+    state,
+    onPhotoSelect,
+    updateToFavPhotoIds,
+    onLoadTopic,
+    setPhotoSelected,
+    onClosePhotoDetailsModal,
+  } = useApplicationData();
 
   return (
     <div className="App">
       <HomeRoute 
         navItems={topics}
         photoItems={photos}
-        favouritePhotos={favouritePhotos}
-        editFavourite={editFavourite}
-        selectPic={selectPic}
+        favouritePhotos={state.favouritePhotos}
+        editFavourite={updateToFavPhotoIds}
+        selectPic={setPhotoSelected}
       />
-      {clickedPic && <PhotoDetailsModal 
-        selectPic={selectPic}
-        item={clickedPic}
-        editFavourite={editFavourite}
+      {state.clickedPic && <PhotoDetailsModal 
+        selectPic={setPhotoSelected}
+        item={state.clickedPic}
+        editFavourite={updateToFavPhotoIds}
         photoItems={photos}
       />}
     </div>
