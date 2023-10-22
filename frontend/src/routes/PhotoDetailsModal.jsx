@@ -34,9 +34,9 @@ const PhotoDetailsModal = ({selectPic, editFavourite, item, photoItems}) => {
       <span className="photo-details-modal__top-bar">Similar Photos</span>
       <section className="photo-details-modal__images">
         <PhotoList 
-          photoItems={photoItems}
+          photoItems={item.similar_photos}
           editFavourite={editFavourite}
-          onClick={selectPic}
+          onClick={() => {return}}
         />
       </section>
     </div>

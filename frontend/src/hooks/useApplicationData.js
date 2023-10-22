@@ -1,4 +1,4 @@
-import {useReducer} from 'react';
+import {useReducer, useEffect} from 'react';
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
@@ -13,19 +13,29 @@ function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.FAV_PHOTO_ADDED:
       return {
+        ...state,
         favouritePhotos: [...state.favouritePhotos, action.item], 
-        clickedPic: state.clickedPic
       };
     case ACTIONS.FAV_PHOTO_REMOVED:
       return {
+        ...state,
         favouritePhotos: state.favouritePhotos.filter((item) => item.id !== action.item.id),
-        clickedPic: state.clickedPic
       }
     case ACTIONS.SELECT_PHOTO:
       return {
-        favouritePhotos: state.favouritePhotos, 
-        clickedPic: action.item
+        ...state, 
+        clickedPic: action.item,
       };
+    case ACTIONS.SET_PHOTO_DATA:
+      return {
+        ...state,
+        photoData: action.item,
+      };
+    case ACTIONS.SET_TOPIC_DATA:
+        return {
+          ...state,
+          topicData: action.item
+        };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -34,7 +44,12 @@ function reducer(state, action) {
 };
 
 const useApplicationData = () => {
-  const [state, dispatch] = useReducer(reducer, {favouritePhotos: [], clickedPic: null});
+  const [state, dispatch] = useReducer(reducer, {
+    favouritePhotos: [], 
+    clickedPic: null,
+    photoData: [],
+    topicData: []
+  });
 
   const updateToFavPhotoIds = (photoItem, adding) => {
     if (adding) {
@@ -52,6 +67,15 @@ const useApplicationData = () => {
   const onClosePhotoDetailsModal = () => {
     dispatch({type: "SELECT_PHOTO", item: null});
   };
+
+  useEffect(() => {
+    fetch('/api/photos')
+      .then(res => res.json())
+      .then(data => dispatch({ type: "SET_PHOTO_DATA", item: [...data] }));
+    fetch('/api/topics')
+      .then(res => res.json())
+      .then(data => dispatch({ type: "SET_TOPIC_DATA", item: [...data] }));
+  }, []);
 
   return {
     state,
