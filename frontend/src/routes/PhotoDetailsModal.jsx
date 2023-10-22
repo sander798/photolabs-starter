@@ -16,7 +16,7 @@ const PhotoDetailsModal = ({selectPic, editFavourite, item, photoItems}) => {
         />
       </button>
       <section>
-        <PhotoFavButton changeFavs={editFavourite}/>
+        <PhotoFavButton changeFavs={(adding) => editFavourite(item, adding)}/>
         <img className="photo-details-modal__image" 
           src={item.urls.full}
         ></img>
