@@ -5,22 +5,12 @@ import PhotoList from '../components/PhotoList';
 import TopNavigation from '../components/TopNavigationBar';
 
 const HomeRoute = (props) => {
-  const [favouritePhotos, setFavouritePhotos] = useState([]);
-
-  const editFavourite = (photoItem, adding) => {
-    if (adding) {
-      setFavouritePhotos([...favouritePhotos, photoItem]);
-    } else {
-      setFavouritePhotos(favouritePhotos.filter((item) => item.id !== photoItem.id));
-    }
-  };
-
   return (
     <div className="home-route">
-      <TopNavigation navItems={props.navItems} favourites={favouritePhotos}/>
+      <TopNavigation navItems={props.navItems} favourites={props.favouritePhotos}/>
       <PhotoList 
         photoItems={props.photoItems}
-        editFavourite={editFavourite}
+        editFavourite={props.editFavourite}
         onClick={props.selectPic}
       />
     </div>
