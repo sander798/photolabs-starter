@@ -10,7 +10,9 @@ function PhotoFavButton(props) {
     setLiked(!liked);
   } 
 
-  useEffect(() => {props.changeFavs(liked)}, [liked]);
+  useEffect(() => {
+    props.changeFavs(liked);
+  }, [liked]);
 
   return (
     <div className="photo-list__fav-icon">
