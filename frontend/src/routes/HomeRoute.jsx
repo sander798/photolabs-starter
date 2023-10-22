@@ -18,7 +18,11 @@ const HomeRoute = (props) => {
   return (
     <div className="home-route">
       <TopNavigation navItems={props.navItems} favourites={favouritePhotos}/>
-      <PhotoList photoItems={props.photoItems} editFavourite={editFavourite}/>
+      <PhotoList 
+        photoItems={props.photoItems}
+        editFavourite={editFavourite}
+        onClick={props.selectPic}
+      />
     </div>
   );
 };

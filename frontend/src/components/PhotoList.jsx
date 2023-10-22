@@ -11,6 +11,7 @@ const PhotoList = (props) => {
           <PhotoListItem
             item={item}
             editFavourite={props.editFavourite}
+            onClick={props.onClick}
             key={item.id}
           />
         );
