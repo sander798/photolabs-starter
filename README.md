@@ -1,7 +1,9 @@
 # react-photolabs
-The PhotoLabs project for the Web Development React course programming.
+A basic image-viewing website created for the purpose of learning React which utilizes a psql database to retrieve all data. Images can be sorted by their topic, and favourited. Clicking on an item card will bring up a larger modal view of the selected image, as well as show related images below it.
 
 # Photolabs
+
+!["The PhotoLabs app"](photolabMain.png)
 
 ## Setup
 
