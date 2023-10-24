@@ -9,11 +9,8 @@ import useApplicationData from "hooks/useApplicationData"
 const App = () => {
   const {
     state,
-    onPhotoSelect,
     updateToFavPhotoIds,
-    onLoadTopic,
     setPhotoSelected,
-    onClosePhotoDetailsModal,
     selectTopic,
   } = useApplicationData();
 

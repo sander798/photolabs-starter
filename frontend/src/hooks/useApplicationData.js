@@ -6,8 +6,6 @@ export const ACTIONS = {
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
   SELECT_PHOTO: 'SELECT_PHOTO',
-  DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
-  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
 };
 
 function reducer(state, action) {
@@ -37,11 +35,6 @@ function reducer(state, action) {
         ...state,
         topicData: action.item
       };
-    case ACTIONS.GET_PHOTOS_BY_TOPICS:// Redundant...
-      return {
-        ...state,
-        photoData: action.item
-      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -58,6 +51,7 @@ const useApplicationData = () => {
     selectedTopic: null,
   });
 
+  //Add a single photo to the favourites
   const updateToFavPhotoIds = (photoItem, adding) => {
     if (adding) {
       dispatch({type: "FAV_PHOTO_ADDED", item: photoItem});
@@ -66,19 +60,16 @@ const useApplicationData = () => {
     }
   };
 
+  //Set a photo to be viewed in modal
   const setPhotoSelected = (photoItem) => {
     dispatch({type: "SELECT_PHOTO", item: photoItem});
   };
 
-  //Completely redundant...
-  const onClosePhotoDetailsModal = () => {
-    dispatch({type: "SELECT_PHOTO", item: null});
-  };
-
+  //Show only the photos belonging to a particular topic
   const selectTopic = (topicSlug) => {
     fetch(`/api/topics/photos/${topicSlug}`)
           .then(res => res.json())
-          .then(data => dispatch({type: "GET_PHOTOS_BY_TOPICS", item: data}));
+          .then(data => dispatch({type: "SET_PHOTO_DATA", item: data}));
   };
 
   useEffect(() => {
@@ -94,7 +85,6 @@ const useApplicationData = () => {
     state,
     updateToFavPhotoIds,
     setPhotoSelected,
-    onClosePhotoDetailsModal,
     selectTopic,
   };
 }
