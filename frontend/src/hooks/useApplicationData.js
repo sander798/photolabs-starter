@@ -6,7 +6,8 @@ export const ACTIONS = {
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
   SELECT_PHOTO: 'SELECT_PHOTO',
-  DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
+  DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
 };
 
 function reducer(state, action) {
@@ -32,10 +33,15 @@ function reducer(state, action) {
         photoData: action.item,
       };
     case ACTIONS.SET_TOPIC_DATA:
-        return {
-          ...state,
-          topicData: action.item
-        };
+      return {
+        ...state,
+        topicData: action.item
+      };
+    case ACTIONS.GET_PHOTOS_BY_TOPICS:// Redundant...
+      return {
+        ...state,
+        photoData: action.item
+      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -48,7 +54,8 @@ const useApplicationData = () => {
     favouritePhotos: [], 
     clickedPic: null,
     photoData: [],
-    topicData: []
+    topicData: [],
+    selectedTopic: null,
   });
 
   const updateToFavPhotoIds = (photoItem, adding) => {
@@ -68,13 +75,19 @@ const useApplicationData = () => {
     dispatch({type: "SELECT_PHOTO", item: null});
   };
 
+  const selectTopic = (topicSlug) => {
+    fetch(`/api/topics/photos/${topicSlug}`)
+          .then(res => res.json())
+          .then(data => dispatch({type: "GET_PHOTOS_BY_TOPICS", item: data}));
+  };
+
   useEffect(() => {
     fetch('/api/photos')
       .then(res => res.json())
-      .then(data => dispatch({ type: "SET_PHOTO_DATA", item: [...data] }));
+      .then(data => dispatch({ type: "SET_PHOTO_DATA", item: data }));
     fetch('/api/topics')
       .then(res => res.json())
-      .then(data => dispatch({ type: "SET_TOPIC_DATA", item: [...data] }));
+      .then(data => dispatch({ type: "SET_TOPIC_DATA", item: data }));
   }, []);
 
   return {
@@ -82,6 +95,7 @@ const useApplicationData = () => {
     updateToFavPhotoIds,
     setPhotoSelected,
     onClosePhotoDetailsModal,
+    selectTopic,
   };
 }
 

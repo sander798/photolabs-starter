@@ -8,7 +8,13 @@ const TopicList = (props) => {
     <div className="top-nav-bar__topic-list">
       {props.items.map((item) => {
         return (
-          <TopicListItem key={item.id} slug={item.slug} title={item.title}/>
+          <TopicListItem
+            key={item.id}
+            id={item.id}
+            slug={item.slug}
+            title={item.title}
+            selectTopic={props.selectTopic}
+          />
         );
       })}
     </div>

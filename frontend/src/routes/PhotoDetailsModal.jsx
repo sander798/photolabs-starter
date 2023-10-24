@@ -5,7 +5,7 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoFavButton from 'components/PhotoFavButton';
 import PhotoList from 'components/PhotoList';
 
-const PhotoDetailsModal = ({selectPic, editFavourite, item, photoItems}) => {
+const PhotoDetailsModal = ({selectPic, editFavourite, item}) => {
   return (
     <div className="photo-details-modal">
       <button className="photo-details-modal__close-button">

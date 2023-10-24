@@ -7,7 +7,11 @@ import TopNavigation from '../components/TopNavigationBar';
 const HomeRoute = (props) => {
   return (
     <div className="home-route">
-      <TopNavigation navItems={props.navItems} favourites={props.favouritePhotos}/>
+      <TopNavigation
+        navItems={props.navItems}
+        favourites={props.favouritePhotos}
+        selectTopic={props.selectTopic}
+      />
       <PhotoList 
         photoItems={props.photoItems}
         editFavourite={props.editFavourite}
