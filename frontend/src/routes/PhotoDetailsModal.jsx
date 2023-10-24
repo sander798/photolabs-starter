@@ -20,7 +20,7 @@ const PhotoDetailsModal = ({selectPic, editFavourite, item}) => {
         <img className="photo-details-modal__image" 
           src={item.urls.full}
         ></img>
-        <div className="photo-details-modal__header">
+        <div className="photo-details-modal__photographer-details">
           <img className="photo-details-modal__photographer-profile" src={item.user.profile}></img>
           <div className="photo-details-modal__photographer-info">
             <span>{item.user.name}</span>
