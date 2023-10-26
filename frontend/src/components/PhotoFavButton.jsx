@@ -7,12 +7,19 @@ function PhotoFavButton(props) {
   const [liked, setLiked] = useState(false);
 
   const handleClick = () => {
-    setLiked(!liked);
+    props.changeFavs(!liked);
   } 
 
   useEffect(() => {
-    props.changeFavs(liked);
-  }, [liked]);
+    for (const pic of props.favouritePhotos) {
+      if (pic.id === props.parentItem.id) {
+        !liked && setLiked(true);
+        return;
+      }
+    }
+
+    setLiked(false);
+  }, [props.favouritePhotos]);
 
   return (
     <div className="photo-list__fav-icon">

@@ -5,7 +5,7 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoFavButton from 'components/PhotoFavButton';
 import PhotoList from 'components/PhotoList';
 
-const PhotoDetailsModal = ({selectPic, editFavourite, item}) => {
+const PhotoDetailsModal = ({selectPic, editFavourite, item, favouritePhotos}) => {
   return (
     <div className="photo-details-modal">
       <button className="photo-details-modal__close-button">
@@ -15,8 +15,12 @@ const PhotoDetailsModal = ({selectPic, editFavourite, item}) => {
           onClick={() => selectPic(null)}
         />
       </button>
-      <section>
-        <PhotoFavButton changeFavs={(adding) => editFavourite(item, adding)}/>
+      <section className=""> 
+        <PhotoFavButton 
+          changeFavs={(adding) => editFavourite(item, adding)}
+          favouritePhotos={favouritePhotos}
+          parentItem={item}
+        />
         <img className="photo-details-modal__image" 
           src={item.urls.full}
         ></img>
@@ -37,6 +41,7 @@ const PhotoDetailsModal = ({selectPic, editFavourite, item}) => {
           photoItems={item.similar_photos}
           editFavourite={editFavourite}
           onClick={() => {return}}
+          favouritePhotos={favouritePhotos}
         />
       </section>
     </div>

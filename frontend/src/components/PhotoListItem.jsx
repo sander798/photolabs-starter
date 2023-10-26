@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-const PhotoListItem = ({item, editFavourite, onClick}) => {
+const PhotoListItem = ({item, editFavourite, favouritePhotos, onClick}) => {
 
   const changeFavourites = (adding) => {
     editFavourite(item, adding);
@@ -11,7 +11,11 @@ const PhotoListItem = ({item, editFavourite, onClick}) => {
 
   return (
     <section className="photo-list__item">
-      <PhotoFavButton changeFavs={changeFavourites}/>
+      <PhotoFavButton 
+        changeFavs={changeFavourites}
+        parentItem={item}
+        favouritePhotos={favouritePhotos}
+      />
       <img className="photo-list__image" 
         src={item.urls.regular}
         onClick={() => onClick(item)}

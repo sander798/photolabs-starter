@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import './App.scss';
 import HomeRoute from 'routes/HomeRoute';
@@ -29,6 +29,7 @@ const App = () => {
         item={state.clickedPic}
         editFavourite={updateToFavPhotoIds}
         photoItems={state.photoData}
+        favouritePhotos={state.favouritePhotos}
       />}
     </div>
   );
