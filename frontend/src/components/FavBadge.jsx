@@ -4,10 +4,13 @@ import FavIcon from './FavIcon';
 import '../styles/FavBadge.scss';
 
 // Nav bar favourites button
-const FavBadge = ({ isFavPhotoExist }) => {
+const FavBadge = ({ isFavPhotoExist, viewFavourites }) => {
   return (
-    <div className='fav-badge'>
-      <FavIcon displayAlert={!!isFavPhotoExist} selected={!!isFavPhotoExist}/>
+    <div className='fav-badge' onClick={() => {viewFavourites()}}>
+      <FavIcon 
+        displayAlert={!!isFavPhotoExist}
+        selected={!!isFavPhotoExist}
+      />
     </div>
   ) 
 };

@@ -72,6 +72,11 @@ const useApplicationData = () => {
           .then(data => dispatch({type: "SET_PHOTO_DATA", item: data}));
   };
 
+  //Show only favourited items
+  const viewFavourites = () => {
+    dispatch({type: "SET_PHOTO_DATA", item: state.favouritePhotos});
+  };
+
   useEffect(() => {
     fetch('/api/photos')
       .then(res => res.json())
@@ -86,6 +91,7 @@ const useApplicationData = () => {
     updateToFavPhotoIds,
     setPhotoSelected,
     selectTopic,
+    viewFavourites
   };
 }
 

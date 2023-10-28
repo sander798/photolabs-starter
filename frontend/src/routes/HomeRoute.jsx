@@ -11,6 +11,7 @@ const HomeRoute = (props) => {
         navItems={props.navItems}
         favourites={props.favouritePhotos}
         selectTopic={props.selectTopic}
+        viewFavourites={props.viewFavourites}
       />
       <PhotoList 
         photoItems={props.photoItems}

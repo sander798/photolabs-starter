@@ -12,6 +12,7 @@ const App = () => {
     updateToFavPhotoIds,
     setPhotoSelected,
     selectTopic,
+    viewFavourites
   } = useApplicationData();
 
   return (
@@ -23,6 +24,7 @@ const App = () => {
         editFavourite={updateToFavPhotoIds}
         selectPic={setPhotoSelected}
         selectTopic={selectTopic}
+        viewFavourites={viewFavourites}
       />
       {state.clickedPic && <PhotoDetailsModal 
         selectPic={setPhotoSelected}
